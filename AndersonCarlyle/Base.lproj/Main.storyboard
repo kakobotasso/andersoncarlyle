@@ -12,7 +12,7 @@
         <!--Lista de compras-->
         <scene sceneID="BPX-oq-Byo">
             <objects>
-                <tableViewController id="Hwa-m8-6ce" sceneMemberID="viewController">
+                <tableViewController id="Hwa-m8-6ce" customClass="PurchaseTableViewController" customModule="AndersonCarlyle" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OhI-qw-oLT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,7 +62,7 @@
         <!--Ajustes-->
         <scene sceneID="LCE-Dy-xtE">
             <objects>
-                <viewController id="BKU-B6-X1I" sceneMemberID="viewController">
+                <viewController id="BKU-B6-X1I" customClass="AdjustmentsViewController" customModule="AndersonCarlyle" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GzM-zw-CyA"/>
                         <viewControllerLayoutGuide type="bottom" id="P4P-vh-IWg"/>
@@ -128,7 +128,7 @@
         <!--Total da compra-->
         <scene sceneID="JUM-01-hph">
             <objects>
-                <viewController id="d8o-XQ-zIe" sceneMemberID="viewController">
+                <viewController id="d8o-XQ-zIe" customClass="TotalPriceViewController" customModule="AndersonCarlyle" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LUp-Dc-MhU"/>
                         <viewControllerLayoutGuide type="bottom" id="rYc-xt-6ti"/>

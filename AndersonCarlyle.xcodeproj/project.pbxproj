@@ -11,6 +11,9 @@
 		853DB5A71E902E4600D9FA6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 853DB5A51E902E4600D9FA6E /* Main.storyboard */; };
 		853DB5A91E902E4600D9FA6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 853DB5A81E902E4600D9FA6E /* Assets.xcassets */; };
 		853DB5AC1E902E4600D9FA6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 853DB5AA1E902E4600D9FA6E /* LaunchScreen.storyboard */; };
+		ACC4D5751E95C4F7005C0479 /* TotalPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC4D5741E95C4F7005C0479 /* TotalPriceViewController.swift */; };
+		ACC4D5771E95C556005C0479 /* AdjustmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC4D5761E95C556005C0479 /* AdjustmentsViewController.swift */; };
+		ACC4D5791E95C5B3005C0479 /* PurchaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC4D5781E95C5B3005C0479 /* PurchaseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		853DB5A81E902E4600D9FA6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		853DB5AB1E902E4600D9FA6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		853DB5AD1E902E4600D9FA6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACC4D5741E95C4F7005C0479 /* TotalPriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalPriceViewController.swift; sourceTree = "<group>"; };
+		ACC4D5761E95C556005C0479 /* AdjustmentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustmentsViewController.swift; sourceTree = "<group>"; };
+		ACC4D5781E95C5B3005C0479 /* PurchaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +60,12 @@
 			children = (
 				853DB5A11E902E4500D9FA6E /* AppDelegate.swift */,
 				853DB5A51E902E4600D9FA6E /* Main.storyboard */,
+				ACC4D5781E95C5B3005C0479 /* PurchaseTableViewController.swift */,
+				ACC4D5761E95C556005C0479 /* AdjustmentsViewController.swift */,
 				853DB5A81E902E4600D9FA6E /* Assets.xcassets */,
 				853DB5AA1E902E4600D9FA6E /* LaunchScreen.storyboard */,
 				853DB5AD1E902E4600D9FA6E /* Info.plist */,
+				ACC4D5741E95C4F7005C0479 /* TotalPriceViewController.swift */,
 			);
 			path = AndersonCarlyle;
 			sourceTree = "<group>";
@@ -134,6 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				853DB5A21E902E4500D9FA6E /* AppDelegate.swift in Sources */,
+				ACC4D5771E95C556005C0479 /* AdjustmentsViewController.swift in Sources */,
+				ACC4D5791E95C5B3005C0479 /* PurchaseTableViewController.swift in Sources */,
+				ACC4D5751E95C4F7005C0479 /* TotalPriceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
