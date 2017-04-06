@@ -115,6 +115,9 @@
                                 <rect key="frame" x="183" y="477" width="121" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Adicionar estado"/>
+                                <connections>
+                                    <action selector="addNewState:" destination="BKU-B6-X1I" eventType="touchUpInside" id="cuX-hk-eUc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
