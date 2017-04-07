@@ -9,10 +9,26 @@
 import UIKit
 
 class AdjustmentsViewController: UIViewController {
+    
+    // MARK: - Outlets
+    @IBOutlet weak var tfCotacao: UITextField!
+    @IBOutlet weak var tfIOF: UITextField!
 
     // MARK: - Super methods
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let cotacao = UserDefaults.standard.string(forKey: "cotacao_dolar") {
+            tfCotacao.text = cotacao
+        }
+        
+        if let iof = UserDefaults.standard.string(forKey: "iof") {
+            tfIOF.text = iof
+        }
     }
     
     // MARK: - Actions
