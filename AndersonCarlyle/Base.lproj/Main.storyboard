@@ -136,10 +136,10 @@
             </objects>
             <point key="canvasLocation" x="937.5" y="685.56338028169012"/>
         </scene>
-        <!--View Controller-->
+        <!--Product Register View Controller-->
         <scene sceneID="aB6-vJ-Zno">
             <objects>
-                <viewController id="g6x-mx-nXQ" sceneMemberID="viewController">
+                <viewController id="g6x-mx-nXQ" customClass="ProductRegisterViewController" customModule="AndersonCarlyle" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bDH-QY-EF6"/>
                         <viewControllerLayoutGuide type="bottom" id="5BU-2x-MjM"/>
@@ -155,10 +155,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s94-EA-ZsL">
-                                <rect key="frame" x="16" y="110" width="288" height="160"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Estado da compra" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qNJ-F8-dUf">
                                 <rect key="frame" x="16" y="278" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -196,9 +192,21 @@
                                 <rect key="frame" x="281" y="281" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s94-EA-ZsL">
+                                <rect key="frame" x="16" y="113" width="288" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="btRegister" destination="jfh-Eq-c0M" id="J3t-W8-XjW"/>
+                        <outlet property="ivProd" destination="s94-EA-ZsL" id="7vG-BB-f9S"/>
+                        <outlet property="swCard" destination="JFO-0I-0Lu" id="8iy-zB-BQb"/>
+                        <outlet property="tfName" destination="bzf-6J-fRY" id="W9Z-Ez-OM3"/>
+                        <outlet property="tfPrice" destination="cB7-Yd-rUG" id="KdL-lU-Tda"/>
+                        <outlet property="tfState" destination="qNJ-F8-dUf" id="Q3k-T0-xsj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZj-lJ-Esx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
