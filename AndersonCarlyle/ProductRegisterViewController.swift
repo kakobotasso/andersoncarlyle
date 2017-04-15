@@ -83,11 +83,42 @@ class ProductRegisterViewController: UIViewController {
         cancel()
     }
     
+    func showAlert(){
+        let alert = UIAlertController(title: "Adicionar Estado", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = "Nome do estado"
+        }
+        
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = "Imposto"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (action: UIAlertAction) in
+            
+            let state = State(context: self.context)
+            state.name = alert.textFields?.first?.text
+            state.tax = Double((alert.textFields?[1].text)!)!
+            
+            do {
+                try self.context.save()
+                self.tfState.text = state.name
+                self.loadStates()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Actions
     @IBAction func saveOrUpdateProduct(_ sender: UIButton) {
     }
     
     @IBAction func addState(_ sender: UIButton) {
+        showAlert()
     }
 }
 
