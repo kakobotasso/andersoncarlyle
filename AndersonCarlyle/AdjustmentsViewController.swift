@@ -97,6 +97,25 @@ extension AdjustmentsViewController: UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let state = dataSource[indexPath.row]
+            context.delete(state)
+            dataSource.remove(at: indexPath.row)
+            
+            do {
+                try context.save()
+                self.tableView.reloadData()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension AdjustmentsViewController: UITableViewDataSource {
