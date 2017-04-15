@@ -18,12 +18,14 @@ class AdjustmentsViewController: UIViewController {
     
     // MARK: - Properties
     var dataSource: [State] = []
+    var label: UILabel!
 
     // MARK: - Super methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        setupLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +84,7 @@ class AdjustmentsViewController: UIViewController {
             do {
                 try self.context.save()
                 self.tableView.reloadData()
+                self.loadStates()
             } catch {
                 print(error.localizedDescription)
             }
@@ -89,6 +92,13 @@ class AdjustmentsViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setupLabel(){
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
+        label.text = "Lista de estados vazia"
+        label.textAlignment = .center
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
 
 }
@@ -120,6 +130,7 @@ extension AdjustmentsViewController: UITableViewDelegate{
 
 extension AdjustmentsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.backgroundView = (dataSource.count == 0) ? label : nil
         return dataSource.count
     }
     
