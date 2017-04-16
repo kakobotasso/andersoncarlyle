@@ -96,20 +96,48 @@ class ProductRegisterViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (action: UIAlertAction) in
             
-            let state = State(context: self.context)
-            state.name = alert.textFields?.first?.text
-            state.tax = Double((alert.textFields?[1].text)!)!
-            
-            do {
-                try self.context.save()
-                self.tfState.text = state.name
-                self.loadStates()
-            } catch {
-                print(error.localizedDescription)
+            if self.validState(alert.textFields?.first?.text, (alert.textFields?[1].text)!) {
+                let state = State(context: self.context)
+                state.name = alert.textFields?.first?.text
+                state.tax = Double((alert.textFields?[1].text)!)!
+                
+                do {
+                    try self.context.save()
+                    self.tfState.text = state.name
+                    self.loadStates()
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func validState(_ name: String?, _ tax: String?) -> Bool{
+        if (name?.isEmpty)! {
+            showErrorMessage("Nome do estado não pode estar em branco")
+            return false
+        }
+        
+        if (tax?.isEmpty)!{
+            showErrorMessage("Imposto não pode ficar em branco")
+            return false
+        }
+        
+        if Double(tax!) == nil {
+            showErrorMessage("Imposto deve conter apenas números")
+            return false
+        }
+        
+        return true
+    }
+    
+    func showErrorMessage(_ message: String){
+        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
