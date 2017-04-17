@@ -35,7 +35,7 @@
                     <navigationItem key="navigationItem" title="Lista de compras" id="FxJ-19-0Ig">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="IXz-ol-hL0">
                             <connections>
-                                <segue destination="g6x-mx-nXQ" kind="show" id="mWt-eb-3F5"/>
+                                <segue destination="g6x-mx-nXQ" kind="show" id="BVs-c1-NvH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lue-GP-KHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937.5" y="685.56338028169012"/>
+            <point key="canvasLocation" x="1329" y="896"/>
         </scene>
         <!--Product Register View Controller-->
         <scene sceneID="aB6-vJ-Zno">
@@ -225,16 +225,19 @@
                                 <rect key="frame" x="281" y="281" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="addState:" destination="g6x-mx-nXQ" eventType="touchUpInside" id="QTS-sK-cig"/>
+                                    <segue destination="BKU-B6-X1I" kind="show" id="coF-SL-hae"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s94-EA-ZsL">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gift" translatesAutoresizingMaskIntoConstraints="NO" id="s94-EA-ZsL">
                                 <rect key="frame" x="16" y="113" width="288" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7u-tx-oFi">
                                 <rect key="frame" x="16" y="113" width="288" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="addImage:" destination="g6x-mx-nXQ" eventType="touchUpInside" id="z1T-hW-OcX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -326,5 +329,9 @@
     <resources>
         <image name="bag-icon" width="25" height="25"/>
         <image name="gears-icon" width="25" height="25"/>
+        <image name="gift" width="384" height="232"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="coF-SL-hae"/>
+    </inferredMetricsTieBreakers>
 </document>

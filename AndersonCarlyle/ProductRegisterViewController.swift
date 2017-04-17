@@ -83,58 +83,6 @@ class ProductRegisterViewController: UIViewController {
         cancel()
     }
     
-    func showAlert(){
-        let alert = UIAlertController(title: "Adicionar Estado", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (textField: UITextField) in
-            textField.placeholder = "Nome do estado"
-        }
-        
-        alert.addTextField { (textField: UITextField) in
-            textField.placeholder = "Imposto"
-        }
-        
-        alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (action: UIAlertAction) in
-            
-            if self.validState(alert.textFields?.first?.text, (alert.textFields?[1].text)!) {
-                let state = State(context: self.context)
-                state.name = alert.textFields?.first?.text
-                state.tax = Double((alert.textFields?[1].text)!)!
-                
-                do {
-                    try self.context.save()
-                    self.tfState.text = state.name
-                    self.loadStates()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func validState(_ name: String?, _ tax: String?) -> Bool{
-        if (name?.isEmpty)! {
-            showErrorMessage("Nome do estado não pode estar em branco")
-            return false
-        }
-        
-        if (tax?.isEmpty)!{
-            showErrorMessage("Imposto não pode ficar em branco")
-            return false
-        }
-        
-        if Double(tax!) == nil {
-            showErrorMessage("Imposto deve conter apenas números")
-            return false
-        }
-        
-        return true
-    }
-    
     func showErrorMessage(_ message: String){
         let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -145,9 +93,9 @@ class ProductRegisterViewController: UIViewController {
     @IBAction func saveOrUpdateProduct(_ sender: UIButton) {
     }
     
-    @IBAction func addState(_ sender: UIButton) {
-        showAlert()
+    @IBAction func addImage(_ sender: UIButton) {
     }
+    
 }
 
 extension ProductRegisterViewController: UIPickerViewDelegate {
