@@ -76,18 +76,17 @@ class PurchaseTableViewController: UITableViewController {
         
         cell.textLabel!.text = product.name
         cell.detailTextLabel!.text = "\(product.price)"
-        cell.imageView!.image = product.image as? UIImage
-
+        
+        if product.image != nil {
+            cell.imageView!.image = product.image as? UIImage
+        } else {
+            cell.imageView!.image = UIImage(named: "gift")
+        }
+        
         return cell
     }
  
-
-    
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
- 
-        
-        
         return true
     }
     
@@ -97,8 +96,6 @@ class PurchaseTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            // Delete the row from the data source
-            
             let product = fetchedResultController.object(at: indexPath)
             
             self.context.delete(product)
@@ -108,29 +105,9 @@ class PurchaseTableViewController: UITableViewController {
             } catch {
                 print(error.localizedDescription)
             }
-        
-            // Editing the row from the data source
-        } else if editingStyle == .insert {
-            
         }
         
     }
- 
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
 }
 extension PurchaseTableViewController: NSFetchedResultsControllerDelegate {

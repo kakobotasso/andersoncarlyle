@@ -122,13 +122,24 @@ class ProductRegisterViewController: UIViewController {
     
     @IBAction func addImage(_ sender: UIButton) {
     
-        self.selectPicture()
+        let alert = UIAlertController(title: "Selecionar foto", message: "De onde você quer escolher a foto", preferredStyle: .actionSheet)
+        
+        let libraryAction = UIAlertAction(title: "Biblioteca de fotos", style: .default) { (action: UIAlertAction) in
+            self.selectPicture(sourceType: .photoLibrary)
+        }
+        alert.addAction(libraryAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
-    func selectPicture() {
+    func selectPicture(sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = sourceType
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
