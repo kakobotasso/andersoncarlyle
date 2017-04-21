@@ -96,6 +96,30 @@ class ProductRegisterViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func validProduct(_ name: String?, _ price: String?, _ state: State?) -> Bool{
+        if (name?.isEmpty)! {
+            showErrorMessage("Nome do produto não pode estar em branco")
+            return false
+        }
+        
+        if state == nil {
+            showErrorMessage("Selecione o estado onde comprou o produto")
+            return false
+        }
+        
+        if (price?.isEmpty)!{
+            showErrorMessage("Preço não pode ficar em branco")
+            return false
+        }
+        
+        if Double(price!) == nil {
+            showErrorMessage("Preço deve conter apenas números")
+            return false
+        }
+        
+        return true
+    }
+    
     // MARK: - Actions
     @IBAction func saveOrUpdateProduct(_ sender: UIButton) {
         
@@ -103,21 +127,23 @@ class ProductRegisterViewController: UIViewController {
         let price = tfPrice.text
         let creditCard = swCard.isOn
         
-        let product = Product(context: self.context)
+        if validProduct(name, price, state){
+            let product = Product(context: self.context)
+            
+            product.name = name
+            product.price = Double(price!)!
+            product.creditcard = creditCard
+            product.state = state
+            product.image = smallImage
         
-        product.name = name
-        product.price = Double(price!)!
-        product.creditcard = creditCard
-        product.state = state
-        product.image = smallImage
-        
-        do {
-            try self.context.save()
-            navigationController?.popViewController(animated: true)
-        } catch {
-            print(error.localizedDescription)
+            do {
+                try self.context.save()
+                navigationController?.popViewController(animated: true)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
         }
-        
         
     }
     
