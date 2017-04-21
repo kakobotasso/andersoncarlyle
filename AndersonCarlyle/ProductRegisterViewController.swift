@@ -20,6 +20,7 @@ class ProductRegisterViewController: UIViewController {
     @IBOutlet weak var btRegister: UIButton!
     @IBOutlet weak var btImageProd: UIButton!
     
+    
     // MARK: - Properties
     var pickerView : UIPickerView!
     var dataSource: [State] = []
@@ -91,6 +92,22 @@ class ProductRegisterViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func saveOrUpdateProduct(_ sender: UIButton) {
+        
+        let name = tfName.text
+        let price = tfPrice.text
+        
+        let product = Product(context: self.context)
+        
+        product.name = name
+        product.price = Double(price!)!
+        
+        do {
+            try self.context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
     }
     
     @IBAction func addImage(_ sender: UIButton) {

@@ -7,32 +7,61 @@
 //
 
 import UIKit
+import CoreData
 
 class PurchaseTableViewController: UITableViewController {
 
+    var fetchedResultController: NSFetchedResultsController<Product>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadProducts()
     }
 
+    func loadProducts(){
+        
+        let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultController.delegate = self
+        
+        do {
+            try fetchedResultController.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        if let count = fetchedResultController.fetchedObjects?.count {
+            return count
+        } else {
+            return 0
+        }
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        // Configure the cell...
+        let product = fetchedResultController.object(at: indexPath)
+        
+        cell.textLabel!.text = product.name
+        cell.detailTextLabel!.text = "\(product.price)"
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.
@@ -69,4 +98,9 @@ class PurchaseTableViewController: UITableViewController {
     }
     */
 
+}
+extension PurchaseTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+    }
 }
