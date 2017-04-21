@@ -23,6 +23,10 @@ class PurchaseTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func setupLabel(){
         label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
         label.text = "Lista de estados vazia"
@@ -72,6 +76,7 @@ class PurchaseTableViewController: UITableViewController {
         
         cell.textLabel!.text = product.name
         cell.detailTextLabel!.text = "\(product.price)"
+        cell.imageView!.image = product.image as? UIImage
 
         return cell
     }

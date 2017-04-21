@@ -24,10 +24,16 @@ class ProductRegisterViewController: UIViewController {
     // MARK: - Properties
     var pickerView : UIPickerView!
     var dataSource: [State] = []
+    var state : State!
+    var smallImage : UIImage!
     
     // MARK: - Super methods
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadStates()
         loadPickerView()
     }
@@ -79,7 +85,7 @@ class ProductRegisterViewController: UIViewController {
     }
     
     func done(){
-        let state = dataSource[pickerView.selectedRow(inComponent: 0)]
+        state = dataSource[pickerView.selectedRow(inComponent: 0)]
         tfState.text = state.name
         cancel()
     }
@@ -95,11 +101,15 @@ class ProductRegisterViewController: UIViewController {
         
         let name = tfName.text
         let price = tfPrice.text
+        let creditCard = swCard.isOn
         
         let product = Product(context: self.context)
         
         product.name = name
         product.price = Double(price!)!
+        product.creditcard = creditCard
+        product.state = state
+        product.image = smallImage
         
         do {
             try self.context.save()
@@ -111,6 +121,16 @@ class ProductRegisterViewController: UIViewController {
     }
     
     @IBAction func addImage(_ sender: UIButton) {
+    
+        self.selectPicture()
+        
+    }
+    
+    func selectPicture() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
     
 }
@@ -128,5 +148,21 @@ extension ProductRegisterViewController: UIPickerViewDataSource{
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return dataSource.count
+    }
+}
+extension ProductRegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        //Como reduzir uma imagem
+        let smallSize = CGSize(width: 300, height: 280)
+        UIGraphicsBeginImageContext(smallSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: smallSize.width, height: smallSize.height))
+        smallImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        ivProd.image = smallImage
+        
+        dismiss(animated: true, completion: nil)
     }
 }
