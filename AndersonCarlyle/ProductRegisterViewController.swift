@@ -113,6 +113,7 @@ class ProductRegisterViewController: UIViewController {
         
         do {
             try self.context.save()
+            navigationController?.popViewController(animated: true)
         } catch {
             print(error.localizedDescription)
         }
