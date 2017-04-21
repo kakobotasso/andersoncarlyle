@@ -13,10 +13,21 @@ class PurchaseTableViewController: UITableViewController {
 
     var fetchedResultController: NSFetchedResultsController<Product>!
     
+    var label : UILabel!
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         loadProducts()
+        setupLabel()
+        
+    }
+    
+    func setupLabel(){
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
+        label.text = "Lista de estados vazia"
+        label.textAlignment = .center
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
 
     func loadProducts(){
@@ -43,9 +54,12 @@ class PurchaseTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if let count = fetchedResultController.fetchedObjects?.count {
+            tableView.backgroundView = (count == 0) ? label : nil
             return count
         } else {
+            tableView.backgroundView = label
             return 0
         }
     }
@@ -89,6 +103,9 @@ class PurchaseTableViewController: UITableViewController {
             } catch {
                 print(error.localizedDescription)
             }
+        
+            // Editing the row from the data source
+        } else if editingStyle == .insert {
             
         }
         
