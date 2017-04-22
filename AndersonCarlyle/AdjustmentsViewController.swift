@@ -77,10 +77,13 @@ class AdjustmentsViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (action: UIAlertAction) in
             
-            if self.validState(alert.textFields?.first?.text, (alert.textFields?[1].text)!) {
+            let name = alert.textFields?.first?.text
+            let tax = (alert.textFields?[1].text)!
+            
+            if self.validState(name, tax) {
                 let state = State(context: self.context)
-                state.name = alert.textFields?.first?.text
-                state.tax = Double((alert.textFields?[1].text)!)!
+                state.name = name
+                state.tax = Double(tax.replacingOccurrences(of: ",", with: "."))!
                 
                 do {
                     try self.context.save()
@@ -109,7 +112,7 @@ class AdjustmentsViewController: UIViewController {
             return false
         }
         
-        if Double(tax!) == nil {
+        if Double(tax!.replacingOccurrences(of: ",", with: ".")) == nil {
             showErrorMessage("Imposto deve conter apenas números")
             return false
         }
