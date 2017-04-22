@@ -317,6 +317,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Total da compra" image="bag-icon" id="6oV-sX-iE5"/>
+                    <connections>
+                        <outlet property="lblBraPrice" destination="Ku3-Da-PKp" id="dwo-3F-0cp"/>
+                        <outlet property="lblUsaPrice" destination="YrI-1s-cM2" id="d4G-wj-Mjm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="85x-dl-whG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
