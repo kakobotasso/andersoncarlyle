@@ -9,6 +9,11 @@
 import UIKit
 import CoreData
 
+enum StateAlertType {
+    case add
+    case edit
+}
+
 class AdjustmentsViewController: UIViewController {
     
     // MARK: - Outlets
@@ -60,28 +65,34 @@ class AdjustmentsViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func addNewState(_ sender: UIButton) {
-        showAlert()
+        showAlert(type: .add, state: nil)
     }
     
     // MARK: - Methods
-    func showAlert(){
-        let alert = UIAlertController(title: "Adicionar Estado", message: nil, preferredStyle: .alert)
+    func showAlert(type: StateAlertType, state: State?){
+        let title = (type == .add) ? "Adicionar" : "Editar"
+        let alert = UIAlertController(title: "\(title) Estado", message: nil, preferredStyle: .alert)
         
         alert.addTextField { (textField: UITextField) in
             textField.placeholder = "Nome do estado"
+            if let name = state?.name {
+                textField.text = name
+            }
         }
         
         alert.addTextField { (textField: UITextField) in
             textField.placeholder = "Imposto"
+            if let tax = state?.tax {
+                textField.text = "\(tax)"
+            }
         }
         
-        alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { (action: UIAlertAction) in
-            
+        alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action: UIAlertAction) in
             let name = alert.textFields?.first?.text
             let tax = (alert.textFields?[1].text)!
             
             if self.validState(name, tax) {
-                let state = State(context: self.context)
+                let state = state ?? State(context: self.context)
                 state.name = name
                 state.tax = Double(tax.replacingOccurrences(of: ",", with: "."))!
                 
@@ -143,21 +154,6 @@ extension AdjustmentsViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let state = dataSource[indexPath.row]
-            context.delete(state)
-            dataSource.remove(at: indexPath.row)
-            
-            do {
-                try context.save()
-                self.tableView.reloadData()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
 }
 
 extension AdjustmentsViewController: UITableViewDataSource {
@@ -175,5 +171,29 @@ extension AdjustmentsViewController: UITableViewDataSource {
         cell?.detailTextLabel?.textColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
         
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Excluir") { (action: UITableViewRowAction, indexPath: IndexPath) in
+            let state = self.dataSource[indexPath.row]
+            self.context.delete(state)
+            
+            do {
+                try self.context.save()
+                self.dataSource.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+
+        
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let state = self.dataSource[indexPath.row]
+        tableView.setEditing(false, animated: true)
+        self.showAlert(type: .edit, state: state)
     }
 }
