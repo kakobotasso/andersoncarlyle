@@ -96,9 +96,14 @@ class ProductRegisterViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func validProduct(_ name: String?, _ price: String?, _ state: State?) -> Bool{
+    func validProduct(_ name: String?, _ price: String?, _ state: State?, _ image: UIImage?) -> Bool{
         if (name?.isEmpty)! {
             showErrorMessage("Nome do produto não pode estar em branco")
+            return false
+        }
+        
+        if image == nil {
+            showErrorMessage("Selecione uma imagem para o produto")
             return false
         }
         
@@ -112,7 +117,7 @@ class ProductRegisterViewController: UIViewController {
             return false
         }
         
-        if Double(price!) == nil {
+        if Double(price!.replacingOccurrences(of: ",", with: ".")) == nil {
             showErrorMessage("Preço deve conter apenas números")
             return false
         }
@@ -134,11 +139,11 @@ class ProductRegisterViewController: UIViewController {
         let price = tfPrice.text
         let creditCard = swCard.isOn
         
-        if validProduct(name, price, state){
+        if validProduct(name, price, state, smallImage){
             let product = Product(context: self.context)
             
             product.name = name
-            product.price = Double(price!)!
+            product.price = Double(price!.replacingOccurrences(of: ",", with: "."))!
             product.creditcard = creditCard
             product.state = state
             product.image = smallImage
