@@ -120,6 +120,13 @@ class ProductRegisterViewController: UIViewController {
         return true
     }
     
+    func selectPicture(sourceType: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     // MARK: - Actions
     @IBAction func saveOrUpdateProduct(_ sender: UIButton) {
         
@@ -151,6 +158,13 @@ class ProductRegisterViewController: UIViewController {
     
         let alert = UIAlertController(title: "Selecionar foto", message: "De onde você quer escolher a foto", preferredStyle: .actionSheet)
         
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action: UIAlertAction) in
+                self.selectPicture(sourceType: .camera)
+            }
+            alert.addAction(cameraAction)
+        }
+        
         let libraryAction = UIAlertAction(title: "Biblioteca de fotos", style: .default) { (action: UIAlertAction) in
             self.selectPicture(sourceType: .photoLibrary)
         }
@@ -162,13 +176,6 @@ class ProductRegisterViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
         
-    }
-    
-    func selectPicture(sourceType: UIImagePickerControllerSourceType) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
     }
     
 }
