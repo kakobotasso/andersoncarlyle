@@ -26,10 +26,12 @@ class ProductRegisterViewController: UIViewController {
     var dataSource: [State] = []
     var state : State!
     var smallImage : UIImage!
+    var product : Product!
     
     // MARK: - Super methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareProduct()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +49,22 @@ class ProductRegisterViewController: UIViewController {
     }
     
     // MARK - Methods
+    func prepareProduct(){
+        if product != nil {
+            tfName.text = product.name
+            tfState.text = product.state?.name
+            state = product.state
+            tfPrice.text = "\(product.price)"
+            swCard.isOn = product.creditcard
+            if let image = product.image as? UIImage {
+                ivProd.image = image
+                smallImage = image
+            }
+            
+            btRegister.setTitle("Atualizar", for: .normal)
+        }
+    }
+    
     func loadStates(){
         let fetchRequest: NSFetchRequest<State> = State.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -140,7 +158,7 @@ class ProductRegisterViewController: UIViewController {
         let creditCard = swCard.isOn
         
         if validProduct(name, price, state, smallImage){
-            let product = Product(context: self.context)
+            let product = self.product ?? Product(context: self.context)
             
             product.name = name
             product.price = Double(price!.replacingOccurrences(of: ",", with: "."))!

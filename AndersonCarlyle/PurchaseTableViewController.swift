@@ -11,22 +11,26 @@ import CoreData
 
 class PurchaseTableViewController: UITableViewController {
 
+    // MARK: - Properties
     var fetchedResultController: NSFetchedResultsController<Product>!
-    
     var label : UILabel!
     
+    // MARK: - Super methods
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         loadProducts()
         setupLabel()
-        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ProductRegisterViewController {
+            if let product = tableView.indexPathForSelectedRow {
+                vc.product = fetchedResultController.object(at: product)
+            }
+        }
     }
     
+    // MARK: - Methods
     func setupLabel(){
         label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
         label.text = "Lista de estados vazia"
@@ -35,7 +39,6 @@ class PurchaseTableViewController: UITableViewController {
     }
 
     func loadProducts(){
-        
         let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         

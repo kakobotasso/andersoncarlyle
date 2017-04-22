@@ -41,6 +41,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="g6x-mx-nXQ" kind="show" id="5ew-TA-D9x"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -353,6 +356,7 @@
         <image name="gift" width="384" height="232"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="BVs-c1-NvH"/>
         <segue reference="coF-SL-hae"/>
     </inferredMetricsTieBreakers>
 </document>
