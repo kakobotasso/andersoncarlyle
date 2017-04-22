@@ -178,6 +178,10 @@ extension AdjustmentsViewController: UITableViewDataSource {
             let state = self.dataSource[indexPath.row]
             self.context.delete(state)
             
+            for product in state.products! {
+                self.context.delete(product as! NSManagedObject)
+            }
+            
             do {
                 try self.context.save()
                 self.dataSource.remove(at: indexPath.row)
